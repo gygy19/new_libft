@@ -3,114 +3,148 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jguyet <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/11/23 12:22:35 by jguyet            #+#    #+#              #
-#    Updated: 2016/01/12 21:14:44 by jguyet           ###   ########.fr        #
+#    Created: 2016/03/25 15:18:38 by jguyet            #+#    #+#              #
+#    Updated: 2016/03/30 10:16:32 by jguyet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = \
-		part1/ft_strlen.c\
-		ft_putchar.c\
-		ft_putstr.c\
-		ft_putnbr.c\
-		ft_putchar_fd.c\
-		ft_putstr_fd.c\
-		ft_putnbr_fd.c\
-		ft_strdup.c\
-		ft_strcmp.c\
-		ft_atoi.c\
-		ft_memset.c\
-		ft_bzero.c\
-		ft_memcpy.c\
-		ft_memccpy.c\
-		ft_memmove.c\
-		ft_memchr.c\
-		ft_memcmp.c\
-		ft_strcpy.c\
-		ft_strncpy.c\
-		ft_strcat.c\
-		ft_strncat.c\
-		ft_strlcat.c\
-		ft_strchr.c\
-		ft_strrchr.c\
-		ft_strstr.c\
-		ft_strnstr.c\
-		ft_strncmp.c\
-		ft_isalpha.c\
-		ft_isdigit.c\
-		ft_isalnum.c\
-		ft_isascii.c\
-		ft_isprint.c\
-		ft_toupper.c\
-		ft_tolower.c\
-		ft_memalloc.c\
-		ft_memdel.c\
-		ft_strnew.c\
-		ft_strdel.c\
-		ft_strclr.c\
-		ft_striter.c\
-		ft_striteri.c\
-		ft_strmap.c\
-		ft_strmapi.c\
-		ft_strequ.c\
-		ft_strnequ.c\
-		ft_strsub.c\
-		ft_strjoin.c\
-		ft_strtrim.c\
-		ft_strsplit.c\
-		ft_putendl.c\
-		ft_putendl_fd.c\
-		ft_itoa.c\
-		ft_lstnew.c\
-		ft_lstdelone.c\
-		ft_lstdel.c\
-		ft_lstadd.c\
-		ft_lstiter.c\
-		ft_lstmap.c\
-		ft_strnchr.c\
-		ft_strndup.c\
-		ft_lstsplit.c\
-		ft_itoabase.c\
-		ft_putnbr_back.c\
-		ft_putlst.c\
-		ft_lenbychar.c\
-		ft_lstaddend.c\
-		ft_add_end_int.c\
-		ft_count_char.c\
-		ft_strtrim_n.c
+NAME		=	libftprintf.a
 
-SRCO = $(SRC:.c=.o)
+NAMEBASE    =   $(shell basename $(NAME) .a)
 
-# COLORS
-C_NO	=		"\033[00m"
-C_OK	=		"\033[35m"
-C_GOOD	=		"\033[32m"
-C_ERROR	=		"\033[31m"
-C_WARN	=		"\033[33m"
+LENGTHNAME	=	`printf "%s" $(NAMEBASE) | wc -c`
 
-SUCCESS	=		$(C_GOOD)SUCCESS$(C_NO)
-OK		=		$(C_OK)OK$(C_NO)
+MAX_COLS	=	$$(echo "$$(tput cols)-20-$(LENGTHNAME)"|bc)
 
-NAME = libft.a
+CC			=	gcc
 
-FLAG = -Werror -Wextra -Wall
+FLAGS		=	-Wall -Wextra -Werror -O3 -ggdb
 
-$(NAME): all
+SRCDIR		=	srcs/
+
+OBJDIR		=	.objs/
+
+INCDIR		=	includes/
+
+SRCBASE		=	\
+				part1/ft_atoi.c								\
+				part1/ft_bzero.c							\
+				part1/ft_isalnum.c							\
+				part1/ft_isalpha.c							\
+				part1/ft_isascii.c							\
+				part1/ft_isdigit.c							\
+				part1/ft_isprint.c							\
+				part1/ft_memccpy.c							\
+				part1/ft_memchr.c							\
+				part1/ft_memcmp.c							\
+				part1/ft_memcpy.c							\
+				part1/ft_memmove.c							\
+				part1/ft_memset.c							\
+				part1/ft_strcat.c							\
+				part1/ft_strchr.c							\
+				part1/ft_strcmp.c							\
+				part1/ft_strcpy.c							\
+				part1/ft_strdup.c							\
+				part1/ft_strlcat.c							\
+				part1/ft_strlen.c							\
+				part1/ft_strncat.c							\
+				part1/ft_strncmp.c							\
+				part1/ft_strncpy.c							\
+				part1/ft_strnstr.c							\
+				part1/ft_strrchr.c							\
+				part1/ft_strstr.c							\
+				part1/ft_tolower.c							\
+				part1/ft_toupper.c							\
+				part2/ft_itoa.c								\
+				part2/ft_memalloc.c							\
+				part2/ft_memdel.c							\
+				part2/ft_putchar.c							\
+				part2/ft_putchar_fd.c						\
+				part2/ft_putendl.c							\
+				part2/ft_putendl_fd.c						\
+				part2/ft_putnbr.c							\
+				part2/ft_putnbr_fd.c						\
+				part2/ft_putstr.c							\
+				part2/ft_putstr_fd.c						\
+				part2/ft_strclr.c							\
+				part2/ft_strdel.c							\
+				part2/ft_strequ.c							\
+				part2/ft_striter.c							\
+				part2/ft_striteri.c							\
+				part2/ft_strjoin.c							\
+				part2/ft_strmap.c							\
+				part2/ft_strmapi.c							\
+				part2/ft_strnequ.c							\
+				part2/ft_strnew.c							\
+				part2/ft_strsplit.c							\
+				part2/ft_strsub.c							\
+				part2/ft_strtrim.c							\
+				bonus/ft_lstadd.c							\
+				bonus/ft_lstdel.c							\
+				bonus/ft_lstdelone.c						\
+				bonus/ft_lstiter.c							\
+				bonus/ft_lstmap.c							\
+				bonus/ft_lstnew.c							\
+				list/ft_lstaddend.c							\
+				list/ft_lstsplit.c							\
+				list/ft_putlst.c							\
+				int/ft_add_end_int.c						\
+				int/ft_itoabase.c							\
+				int/ft_putnbr_back.c						\
+				string/ft_count_char.c						\
+				string/ft_lenbychar.c						\
+				string/ft_strnchr.c							\
+				string/ft_strndup.c							\
+				string/ft_strtrim_n.c						\
+				string/ft_strtrim_string.c					\
+
+SRCS		=	$(addprefix $(SRCDIR), $(SRCBASE))
+
+OBJS		=	$(addprefix $(OBJDIR), $(SRCBASE:.c=.o))
+
+.SILENT:
 
 all:
-	@gcc -I ../includes -c $(SRC) $(FLAG)
-	@ar rc $(NAME) $(SRCO)
-	@ranlib $(NAME)
+	$(MAKE) -j $(NAME)
 
+$(NAME):	$(OBJDIR) $(OBJS)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
+	echo "\r\033[38;5;40mMAKE    [\033[0m$(NAMEBASE)\033[38;5;40m]\033[K"
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+	mkdir -p $(dir $(OBJS))
+
+$(OBJDIR)%.o : $(SRCDIR)%.c | $(OBJDIR)
+	$(CC) $(FLAGS) -MMD -c $< -o $@											\
+		-I $(INCDIR)
+	printf "\r\033[38;5;117m%s%*.*s\033[0m\033[K"							\
+	"MAKE   "$(NAMEBASE)" plz wait ..."										\
+		$(MAX_COLS) $(MAX_COLS) "($(@))"
 
 clean:
-	@rm -rf $(SRCO)
+	if [[ `rm -R $(OBJDIR) &> /dev/null 2>&1; echo $$?` == "0" ]]; then		\
+		echo -en "\r\033[38;5;101mCLEAN  "									\
+		"[\033[0m$(NAMEBASE)\033[38;5;101m]\033[K";							\
+	else																	\
+		printf "\r";														\
+	fi
 
 fclean:		clean
-	@rm -rf $(NAME)
+	if [[ `rm $(NAME) &> /dev/null 2>&1; echo $$?` == "0" ]]; then			\
+		echo -en "\r\033[38;5;124mFCLEAN "									\
+		"[\033[0m$(NAMEBASE)\033[38;5;124m]\033[K";							\
+	else																	\
+		printf "\r";														\
+	fi
 
-re:		fclean all
+re:			fclean all
 
-.PHONY: all fclean clean re
+.PHONY:		fclean clean re
+
+-include $(OBJS:.o=.d)
+
+.PHONY: all clean fclean re
