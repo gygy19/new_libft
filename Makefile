@@ -99,6 +99,15 @@ SRCBASE		=	\
 				string/ft_strndup.c							\
 				string/ft_strtrim_n.c						\
 				string/ft_strtrim_string.c					\
+				printf/flag_X.c								\
+				printf/flag_c.c								\
+				printf/flag_d.c								\
+				printf/flag_ld.c							\
+				printf/flag_s.c								\
+				printf/flag_x.c								\
+				printf/ft_printf.c							\
+				printf/handler.c							\
+				printf/sub_flags.c
 
 SRCS		=	$(addprefix $(SRCDIR), $(SRCBASE))
 
