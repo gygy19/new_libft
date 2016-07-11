@@ -17,9 +17,11 @@
 #include <unistd.h>
 #include <limits.h>
 
+#define INT_MIN ((int) 0x8000/0x80000000)
+
 int		main(void)
 {
-	ft_printf("%ld\n", -50);
-	ft_printf("%d\n", 50);
+	ft_printf("%d\n", INT_MIN);
+	printf("%d", INT_MIN);
 	return (0);
 }

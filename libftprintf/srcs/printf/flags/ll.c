@@ -19,7 +19,6 @@ char		*flag_ll(t_string *string, short base)
 	long long int			tmp;
 
 	tmp = get_long_long_int(string);
-
 	if (tmp < 0)
 	{
 		tmp = -tmp;

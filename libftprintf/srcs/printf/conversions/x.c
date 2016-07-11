@@ -24,8 +24,6 @@ static void		conv_process(t_string *string, char *tmp)
 	if (string->sub_flags & SUB_SPACE)
 		string->sub_flags -= SUB_SPACE;
 	precision(string);
-	//tmp = precision(string, tmp, 0, ft_strlen(tmp));
-	//add_string(string, tmp, 2);
 }
 
 int				conv_x(t_string *string, int i)

@@ -37,22 +37,6 @@ static int		sub(t_string *string, int i, char *s, int zero)
 	return (i);
 }
 
-short	get_total_point_wait(t_string *string, int i)
-{
-	short point;
-
-	point = 0;
-	while ((string->s[i + 1] && ft_isdigit(string->s[i + 1]))
-		|| (string->s[i + 1] && string->s[i + 1] == '.')
-		|| (string->s[i + 1] && string->s[i + 1] == '*'))
-	{
-		if (string->s[i + 1] == '.')
-			point++;
-		i++;
-	}
-	return (point);
-}
-
 static void		final_parse_sub(t_string *string, char **n)
 {
 	int		i;
@@ -78,7 +62,7 @@ static int		center_parse_sub(t_string *string, int i, char **n)
 	short point;
 	short startpts;
 
-	point = 0;//get_total_point_wait(string, i);
+	point = 0;
 	startpts = point;
 	while ((string->s[i + 1] && ft_isdigit(string->s[i + 1]))
 		|| (string->s[i + 1] && string->s[i + 1] == '.')

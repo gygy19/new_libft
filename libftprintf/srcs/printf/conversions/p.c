@@ -22,7 +22,7 @@ static void		conv_process(t_string *string, char *tmp)
 	precision(string);
 }
 
-int			conv_p(t_string *string, int i)
+int				conv_p(t_string *string, int i)
 {
 	char *tmp;
 

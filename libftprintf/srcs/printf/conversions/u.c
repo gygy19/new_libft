@@ -19,8 +19,6 @@ static void		conv_process(t_string *string, char *tmp)
 	string->base = 10;
 	string->tmp = tmp;
 	precision(string);
-	//tmp = precision(string, tmp, 0, ft_strlen(tmp));
-	//add_string(string, tmp, 2);
 }
 
 int				conv_u(t_string *string, int i)

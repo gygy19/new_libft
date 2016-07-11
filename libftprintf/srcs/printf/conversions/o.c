@@ -19,10 +19,7 @@ static void		conv_process(t_string *string, char *tmp)
 	string->base = 8;
 	string->tmp = tmp;
 	precision(string);
-	//tmp = precision(string, tmp, 0, ft_strlen(tmp));
-	//add_string(string, tmp, 2);
 }
-
 
 int				conv_o(t_string *string, int i)
 {

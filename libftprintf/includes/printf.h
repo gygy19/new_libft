@@ -21,32 +21,51 @@ int						ft_asprintf(char **ptr, const char *s, ...);
 
 # ifdef PRINTF_PROG
 
-typedef struct     			s_convert
+typedef struct			s_convert
 {
-	char 					type[2]; 
-}							t_convert;
+	char				type[2];
+}						t_convert;
 
-typedef struct				s_string
+typedef enum			e_ptr_conv
 {
-	char					*s;
-	va_list					list;
-	unsigned int			res;
-	t_convert				converter;
-	unsigned short			sub_flags;
-	char					*sub_num;
-	char					*new;
-	int						space;
-	int						zero;
-	short					is_negative;
-	short 					left;
-	short 					pad;
-	short 					base;
-	short 					end;
-	char 					*tmp;
-}							t_string;
+	s = 0,
+	c,
+	d,
+	i,
+	x,
+	big_x,
+	big_c,
+	big_s,
+	p,
+	big_d,
+	o,
+	big_o,
+	u,
+	big_u,
+	conv_len
+}						t_ptr_conv;
 
-# define BUFFER 2048
+typedef struct			s_string
+{
+	char				*s;
+	va_list				list;
+	unsigned int		res;
+	t_convert			converter;
+	unsigned short		sub_flags;
+	char				*sub_num;
+	char				*new;
+	int					space;
+	int					zero;
+	short				is_negative;
+	short				left;
+	short				pad;
+	short				base;
+	short				end;
+	char				*tmp;
+	void				*ptrs[conv_len];
+}						t_string;
 
+#  define BUFFER 2048
 #  define FLAG string->s + (i + 1)
 #  define SUB_SHARP 1024
 #  define SUB_ZERO 2048
@@ -55,6 +74,7 @@ typedef struct				s_string
 #  define SUB_SPACE 16384
 #  define DELIMITER '%'
 #  define MAX_UINT 4294967295
+
 /*
 **	HANDLER
 */
@@ -77,7 +97,8 @@ void					add_int(t_string *string, int s);
 void					add_uint(t_string *string, unsigned int s);
 void					add_uint_long(t_string *string, unsigned long int s);
 void					add_long_int(t_string *string, long int s);
-void					add_uint_long_long(t_string *string, unsigned long long int s);
+void					add_uint_long_long(t_string *string, \
+						unsigned long long int s);
 /*
 **	SUBFLAGS
 */
@@ -138,7 +159,8 @@ int						conv_x(t_string *string, int i);
 */
 
 void					flag_default_char(t_string *string, char tmp);
-void					flag_default_string(t_string *string, char *tmp, short del);
+void					flag_default_string(t_string *string, \
+						char *tmp, short del);
 void					add_conv_string(t_string *t, char *s);
 void					add_conv_char(t_string *t, char c);
 void					add_conv_wchar(t_string *t, wchar_t c);

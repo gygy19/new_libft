@@ -28,7 +28,7 @@ static void		s_trunc(char **s, int length)
 	*s = ft_strndup(*s, length);
 }
 
-void	fill_character(t_string *t, char c)
+void			fill_character(t_string *t, char c)
 {
 	while (t->space > 0)
 	{
@@ -48,12 +48,12 @@ void			add_conv_string(t_string *t, char *s)
 		s_trunc(&s, t->zero);
 		len = ft_strlen(s);
 	}
-	else if (ft_strlen(t->sub_num) > 0 && t->sub_num[ft_strlen(t->sub_num) - 1] == '.')
+	else if (ft_strlen(t->sub_num) > 0 \
+		&& t->sub_num[ft_strlen(t->sub_num) - 1] == '.')
 	{
 		s = ft_strnew(0);
 		len = 0;
 	}
-	//ft_putstr(t->sub_num);
 	if ((t->space -= len) < 0)
 	{
 		add_string(t, s, 0);

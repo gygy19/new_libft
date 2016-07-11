@@ -19,71 +19,37 @@ int			inter(t_string *string, int i, int f(t_string*, int))
 	return (f(string, i));
 }
 
+void		load_ptr_function(t_string *string)
+{
+	string->ptrs[s] = &conv_s;
+	string->ptrs[c] = &conv_c;
+	string->ptrs[d] = &conv_d;
+	string->ptrs[i] = &conv_d;
+	string->ptrs[x] = &conv_x;
+	string->ptrs[big_x] = &conv_big_x;
+	string->ptrs[big_c] = &conv_big_c;
+	string->ptrs[big_s] = &conv_big_s;
+	string->ptrs[p] = &conv_p;
+	string->ptrs[big_d] = &conv_big_d;
+	string->ptrs[o] = &conv_o;
+	string->ptrs[big_o] = &conv_big_o;
+	string->ptrs[u] = &conv_u;
+	string->ptrs[big_u] = &conv_big_u;
+}
+
 int			parse_ptr(t_string *string, int i)
 {
 	int		l;
-	char	ptrs[15] = "scdixXCSpDoOuU";
-	void	*fptrs[15] = {	conv_s,
-							conv_c,
-							conv_d,
-							conv_d,
-							conv_x,
-							conv_big_x,
-							conv_big_c,
-							conv_p,
-							conv_big_d,
-							conv_o,
-							conv_big_o,
-							conv_u,
-							conv_big_u};
+	char	*sptrs;
 
-	l = 0;
-	while (ptrs[l])
-	{
-		if (ptrs[l] == string->s[i + 1])
-		{
-			return (inter(string, i, fptrs[l]));
-		}
-		l++;
-	}
-	return (i);
-}
-
-int			parse_one(t_string *string, int i)
-{
-	if (!ft_strncmp("s", FLAG, 1))
-		i = conv_s(string, i);
-	else if (!ft_strncmp("c", FLAG, 1))
-		i = conv_c(string, i);
-	else if (!ft_strncmp("d", FLAG, 1) || !ft_strncmp("i", FLAG, 1))
-		i = conv_d(string, i);
-	else if (!ft_strncmp("x", FLAG, 1))
-		i = conv_x(string, i);
-	else if (!ft_strncmp("X", FLAG, 1))
-		i = conv_big_x(string, i);
-	else if (!ft_strncmp("C", FLAG, 1))
-		i = conv_big_c(string, i);
-	else if (!ft_strncmp("S", FLAG, 1))
-		i = conv_big_s(string, i);
-	else if (!ft_strncmp("%", FLAG, 1) && (i = i + 1))
+	sptrs = ft_strdup("scdixXCSpDoOuU");
+	load_ptr_function(string);
+	l = -1;
+	while (sptrs[++l])
+		if (sptrs[l] == string->s[i + 1])
+			return (inter(string, i, string->ptrs[l]));
+	if (!ft_strncmp("%", FLAG, 1) && (i = i + 1))
 		add_char(string, '%');
-	return (i);
-}
-
-int			parse_two(t_string *string, int i)
-{
-	if (!ft_strncmp("p", FLAG, 1))
-		i = conv_p(string, i);
-	else if (!ft_strncmp("D", FLAG, 1))
-		i = conv_big_d(string, i);
-	else if (!ft_strncmp("o", FLAG, 1))
-		i = conv_o(string, i);
-	else if (!ft_strncmp("O", FLAG, 1))
-		i = conv_big_o(string, i);
-	else if (!ft_strncmp("u", FLAG, 1))
-		i = conv_u(string, i);
-	else if (!ft_strncmp("U", FLAG, 1))
-		i = conv_big_u(string, i);
 	return (i);
 }
 
@@ -129,6 +95,16 @@ int			select_converter_one(t_string *string, int i)
 	return (i);
 }
 
+void		restart_string_params(t_string *string)
+{
+	string->converter.type[0] = '\0';
+	string->converter.type[1] = '\0';
+	string->sub_flags = 0;
+	string->space = 0;
+	string->zero = 0;
+	string->is_negative = 0;
+}
+
 int			parse_flags(t_string *string, int i)
 {
 	int save;
@@ -146,14 +122,8 @@ int			parse_flags(t_string *string, int i)
 		i = sub_flags(string, i);
 		i = select_converter_one(string, i);
 		save = i + 1;
-		if ((i = parse_one(string, i)) != save)
-			i = parse_two(string, i);
-		//i = parse_ptr(string, i);
-		string->converter.type[0] = '\0';
-		string->converter.type[1] = '\0';
-		string->sub_flags = 0;
-		string->space = 0;
-		string->zero = 0;
+		i = parse_ptr(string, i);
+		restart_string_params(string);
 		ft_strdel(&string->sub_num);
 	}
 	else

@@ -14,7 +14,7 @@
 
 #include "printf.h"
 
-void		load(t_string *t)
+void			load(t_string *t)
 {
 	if (ft_strlen(t->sub_num) == 0 || !ft_strcmp(t->sub_num, "."))
 	{
@@ -29,7 +29,7 @@ void		load(t_string *t)
 		t->zero = ft_atoi(t->sub_num + ft_nbrlen(t->space) + 1);
 }
 
-int		ft_max(int min, int nbr)
+int				ft_max(int min, int nbr)
 {
 	if (nbr < min)
 		return (min);
@@ -43,7 +43,8 @@ static void		s_alt(t_string *t)
 		add_char(t, L'0');
 		add_char(t, t->zero);
 	}
-	if (ft_atoi(t->tmp) != 0 && (t->sub_flags & SUB_SHARP) && t->base == 8)
+	if (ft_atoi(t->tmp) != 0 \
+		&& (t->sub_flags & SUB_SHARP) && t->base == 8)
 	{
 		add_char(t, '0');
 		t->space -= 1;
@@ -71,7 +72,8 @@ static void		if_flags(t_string *t)
 		t->space -= 1;
 	if ((t->sub_flags & SUB_SHARP) && t->base == 16)
 		t->space -= 2;
-	if (t->zero <= (short)ft_strlen(t->tmp) && (t->sub_flags & SUB_SHARP) && t->base == 8)
+	if (t->zero <= (short)ft_strlen(t->tmp) \
+		&& (t->sub_flags & SUB_SHARP) && t->base == 8)
 		t->space -= 1;
 }
 
@@ -85,18 +87,13 @@ static void		not_left(t_string *t)
 		fill_character(t, ' ');
 		t->space = 0;
 	}
-	/*if (t->pad == ' ' && (t->sub_flags & SUB_ZERO))
-	{
-		fill_character(t, '0');
-		t->space = 0;
-	}*/
 	s_alt(t);
 	t->space += t->zero;
 	fill_character(t, '0');
 	add_string(t, t->tmp, 2);
 }
 
-void		precision(t_string *t)
+void			precision(t_string *t)
 {
 	load(t);
 	if (t->zero < 0)

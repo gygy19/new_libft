@@ -19,11 +19,9 @@ static void		conv_process(t_string *string, char *tmp)
 	string->base = 10;
 	string->tmp = tmp;
 	precision(string);
-	//tmp = precision(string, tmp, 0, ft_strlen(tmp));
-	//add_string(string, tmp, 2);
 }
 
-int			conv_d(t_string *string, int i)
+int				conv_d(t_string *string, int i)
 {
 	if (!ft_strncmp("ll", string->converter.type, 2))
 		conv_process(string, flag_ll(string, 10));
@@ -42,7 +40,7 @@ int			conv_d(t_string *string, int i)
 	return (i + 1);
 }
 
-int			conv_big_d(t_string *string, int i)
+int				conv_big_d(t_string *string, int i)
 {
 	if (!ft_strncmp("ll", string->converter.type, 2))
 		conv_process(string, flag_ll(string, 10));
