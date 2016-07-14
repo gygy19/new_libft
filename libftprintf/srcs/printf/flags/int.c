@@ -14,12 +14,31 @@
 
 #include "printf.h"
 
+char		*min_int(t_string *string, short base)
+{
+	long int tmp2;
+
+	tmp2 = 2147483648;
+	string->is_negative = 1;
+	if (base == 8)
+		return (ft_itoabase(tmp2, "01234567"));
+	else if (base == 10)
+		return (ft_litoa(tmp2));
+	else if (base == 16)
+		return (ft_itoabase(tmp2, "0123456789abcdef"));
+	else if (base == 32)
+		return (ft_itoabase(tmp2, "0123456789ABCDEF"));
+	return (NULL);
+}
+
 char		*flag_int(t_string *string, short base)
 {
 	int		tmp;
 
 	tmp = get_int(string);
-	if (tmp < 0)
+	if (tmp == -2147483648)
+		return (min_int(string, base));
+	else if (tmp < 0)
 	{
 		tmp = -tmp;
 		string->is_negative = 1;

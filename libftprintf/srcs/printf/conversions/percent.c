@@ -16,6 +16,7 @@
 
 static void		conv_process(t_string *string, char *tmp)
 {
+	string->is_big = 5;
 	add_conv_string(string, tmp);
 }
 

@@ -32,7 +32,7 @@ int				conv_d(t_string *string, int i)
 	else if (!ft_strncmp("h", string->converter.type, 1))
 		conv_process(string, flag_h(string, 10));
 	else if (!ft_strncmp("z", string->converter.type, 1))
-		conv_process(string, flag_z(string, 10));
+		conv_process(string, flag_ll(string, 10));
 	else if (!ft_strncmp("j", string->converter.type, 1))
 		conv_process(string, flag_j(string, 10));
 	else
@@ -47,9 +47,9 @@ int				conv_big_d(t_string *string, int i)
 	else if (!ft_strncmp("l", string->converter.type, 1))
 		conv_process(string, flag_l(string, 10));
 	else if (!ft_strncmp("hh", string->converter.type, 2))
-		conv_process(string, flag_hh(string, 10));
+		conv_process(string, flag_uint(string, 10));
 	else if (!ft_strncmp("h", string->converter.type, 1))
-		conv_process(string, flag_h(string, 10));
+		conv_process(string, flag_uh(string, 10));
 	else if (!ft_strncmp("z", string->converter.type, 1))
 		conv_process(string, flag_z(string, 10));
 	else if (!ft_strncmp("j", string->converter.type, 1))

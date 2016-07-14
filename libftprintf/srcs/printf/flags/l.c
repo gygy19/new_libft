@@ -14,11 +14,27 @@
 
 #include "printf.h"
 
+static char	*min_long(t_string *string, short base)
+{
+	string->is_negative = 1;
+	if (base == 8)
+		return (ft_strdup("1000000000000000000000"));
+	else if (base == 10)
+		return (ft_strdup("9223372036854775808"));
+	else if (base == 16)
+		return (ft_strdup("7fffffffffffffff"));
+	else if (base == 32)
+		return (ft_strdup("7FFFFFFFFFFFFFFF"));
+	return (NULL);
+}
+
 char		*flag_l(t_string *string, short base)
 {
 	long long int		tmp;
 
 	tmp = get_long_int(string);
+	if (tmp < -9223372036854775807)
+		return (min_long(string, base));
 	if (tmp < 0)
 	{
 		tmp = -tmp;

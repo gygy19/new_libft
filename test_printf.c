@@ -17,11 +17,12 @@
 #include <unistd.h>
 #include <limits.h>
 
-#define INT_MIN ((int) 0x8000/0x80000000)
 
 int		main(void)
 {
-	ft_printf("%d\n", INT_MIN);
-	printf("%d", INT_MIN);
+	/*int ret2 = printf("a%Sb%sc%S", L"我", "42", L"猫");
+	int ret = ft_printf("a%Sb%sc%S", L"我", "42", L"猫");
+
+	printf("\n%d, %d", ret, ret2);*/
 	return (0);
 }

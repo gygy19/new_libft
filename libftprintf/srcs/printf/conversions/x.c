@@ -23,6 +23,9 @@ static void		conv_process(t_string *string, char *tmp)
 		string->sub_flags -= SUB_SUP;
 	if (string->sub_flags & SUB_SPACE)
 		string->sub_flags -= SUB_SPACE;
+	if (tmp != NULL && (string->sub_flags & SUB_SHARP) \
+		&& !ft_strcmp("0", tmp))
+		string->sub_flags -= SUB_SHARP;
 	precision(string);
 }
 
@@ -39,7 +42,7 @@ int				conv_x(t_string *string, int i)
 	else if (!ft_strncmp(string->converter.type, "z", 1))
 		conv_process(string, flag_z(string, 16));
 	else if (!ft_strncmp(string->converter.type, "j", 1))
-		conv_process(string, flag_j(string, 16));
+		conv_process(string, flag_ull(string, 16));
 	else
 		conv_process(string, flag_uint(string, 16));
 	return (i + 1);
@@ -47,6 +50,7 @@ int				conv_x(t_string *string, int i)
 
 int				conv_big_x(t_string *string, int i)
 {
+	string->is_big = 1;
 	if (!ft_strncmp(string->converter.type, "ll", 2))
 		conv_process(string, flag_ull(string, 32));
 	else if (!ft_strncmp(string->converter.type, "l", 1))
@@ -58,7 +62,7 @@ int				conv_big_x(t_string *string, int i)
 	else if (!ft_strncmp(string->converter.type, "z", 1))
 		conv_process(string, flag_z(string, 32));
 	else if (!ft_strncmp(string->converter.type, "j", 1))
-		conv_process(string, flag_j(string, 32));
+		conv_process(string, flag_ull(string, 32));
 	else
 		conv_process(string, flag_uint(string, 32));
 	return (i + 1);

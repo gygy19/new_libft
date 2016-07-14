@@ -49,7 +49,7 @@ void			add_conv_string(t_string *t, char *s)
 		len = ft_strlen(s);
 	}
 	else if (ft_strlen(t->sub_num) > 0 \
-		&& t->sub_num[ft_strlen(t->sub_num) - 1] == '.')
+		&& t->sub_num[ft_strlen(t->sub_num) - 1] == '.' && t->is_big != 5)
 	{
 		s = ft_strnew(0);
 		len = 0;

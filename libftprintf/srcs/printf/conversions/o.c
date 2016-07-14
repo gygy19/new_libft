@@ -18,6 +18,7 @@ static void		conv_process(t_string *string, char *tmp)
 {
 	string->base = 8;
 	string->tmp = tmp;
+	string->is_big = 4;
 	precision(string);
 }
 
@@ -34,7 +35,7 @@ int				conv_o(t_string *string, int i)
 	else if (!ft_strncmp(string->converter.type, "z", 1))
 		conv_process(string, flag_z(string, 8));
 	else if (!ft_strncmp(string->converter.type, "j", 1))
-		conv_process(string, flag_j(string, 8));
+		conv_process(string, flag_ull(string, 8));
 	else
 		conv_process(string, flag_uint(string, 8));
 	return (i + 1);
@@ -45,7 +46,7 @@ int				conv_big_o(t_string *string, int i)
 	if (!ft_strncmp(string->converter.type, "ll", 2))
 		conv_process(string, flag_ll(string, 8));
 	else if (!ft_strncmp(string->converter.type, "hh", 2))
-		conv_process(string, flag_uhh(string, 8));
+		conv_process(string, flag_uint(string, 8));
 	else if (!ft_strncmp(string->converter.type, "h", 1))
 		conv_process(string, flag_uh(string, 8));
 	else if (!ft_strncmp(string->converter.type, "z", 1))

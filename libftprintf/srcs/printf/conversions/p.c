@@ -19,6 +19,7 @@ static void		conv_process(t_string *string, char *tmp)
 	string->base = 16;
 	string->tmp = tmp;
 	string->is_negative = 0;
+	string->is_big = 3;
 	precision(string);
 }
 
@@ -27,13 +28,10 @@ int				conv_p(t_string *string, int i)
 	char *tmp;
 
 	tmp = va_arg(string->list, void *);
-	if (tmp == NULL)
-		tmp = ft_strdup("0x0");
-	else
-	{
+	if (tmp != NULL)
 		tmp = ft_uitoabase((unsigned long int)tmp, "0123456789abcdef");
-		tmp = ft_dstrjoin("0x", tmp, 2);
-	}
+	else if (tmp == 0)
+		tmp = ft_strdup("0");
 	conv_process(string, tmp);
 	return (i + 1);
 }

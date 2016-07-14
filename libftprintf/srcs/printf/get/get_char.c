@@ -31,7 +31,7 @@ wchar_t			get_wchar(t_string *t)
 	return ((wchar_t)va_arg(t->list, wchar_t));
 }
 
-intmax_t			get_intmax_t(t_string *t)
+intmax_t		get_intmax_t(t_string *t)
 {
 	return ((intmax_t)va_arg(t->list, intmax_t));
 }

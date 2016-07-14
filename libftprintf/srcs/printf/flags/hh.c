@@ -14,11 +14,27 @@
 
 #include "printf.h"
 
+static char	*min_char(t_string *string, short base)
+{
+	string->is_negative = 1;
+	if (base == 8)
+		return (ft_strdup("200"));
+	else if (base == 10)
+		return (ft_strdup("128"));
+	else if (base == 16)
+		return (ft_strdup("80"));
+	else if (base == 32)
+		return (ft_strdup("80"));
+	return (NULL);
+}
+
 char		*flag_hh(t_string *string, short base)
 {
 	char	tmp;
 
 	tmp = get_char(string);
+	if (tmp < -127)
+		return (min_char(string, base));
 	if (tmp < 0)
 	{
 		tmp = -tmp;
@@ -39,7 +55,7 @@ char		*flag_uhh(t_string *string, short base)
 {
 	unsigned char	tmp;
 
-	tmp = (unsigned char)get_uint(string);
+	tmp = get_uchar(string);
 	string->is_negative = 0;
 	if (base == 8)
 		return (ft_uitoabase(tmp, "01234567"));

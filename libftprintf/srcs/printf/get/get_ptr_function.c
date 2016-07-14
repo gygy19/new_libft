@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_outstring.c                                     :+:      :+:    :+:   */
+/*   get_ptr_function.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/21 06:48:50 by jguyet            #+#    #+#             */
-/*   Updated: 2016/05/21 06:48:52 by jguyet           ###   ########.fr       */
+/*   Created: 2016/07/12 19:12:54 by jguyet            #+#    #+#             */
+/*   Updated: 2016/07/12 19:14:35 by jguyet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void			ft_outstring(char **ptr, int len)
-{
-	char	*tmp;
-	int		i;
+#define PRINTF_PROG
 
-	if (len <= 0)
-		return ;
-	tmp = *ptr;
-	i = len;
-	while (tmp[i])
-	{
-		tmp[i - len] = tmp[i];
-		i++;
-	}
-	i -= len;
-	while (tmp[i])
-		tmp[i++] = '\0';
+#include "printf.h"
+
+int			get_ptr_function(t_string *string, int i, int f(t_string*, int))
+{
+	if (!f)
+		return (0);
+	return (f(string, i));
 }

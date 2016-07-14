@@ -19,4 +19,3 @@ int		ft_nbrlen(long long int nbr)
 		len++;
 	return (len);
 }
-

@@ -127,6 +127,7 @@ char				*ft_litoa(long long int c);
 char				*ft_itoabase(long long int nbr, char *base);
 int					*ft_add_end_int(int *tab, int val, int size);
 int					ft_nbrlen(long long int nbr);
+int					ft_max(int min, int nbr);
 
 /*
 ** UINT

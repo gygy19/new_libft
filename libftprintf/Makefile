@@ -6,7 +6,7 @@
 #    By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/25 15:18:38 by jguyet            #+#    #+#              #
-#    Updated: 2016/05/30 23:10:54 by frmarinh         ###   ########.fr        #
+#    Updated: 2016/07/12 19:17:15 by jguyet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRCBASE		=	\
 				int/ft_itoabase.c							\
 				int/ft_litoa.c								\
 				int/ft_nbrlen.c								\
+				int/ft_max.c								\
 				uint/ft_uitoabase.c							\
 				uint/ft_uitoa.c								\
 				string/ft_count_char.c						\
@@ -117,7 +118,7 @@ SRCBASE		=	\
 				printf/conversions/c.c						\
 				printf/conversions/d.c						\
 				printf/conversions/o.c						\
-				printf/conversions/purcente.c				\
+				printf/conversions/percent.c				\
 				printf/conversions/s.c						\
 				printf/conversions/p.c						\
 				printf/conversions/u.c						\
@@ -138,6 +139,8 @@ SRCBASE		=	\
 				printf/precision/precision_left.c			\
 				printf/handler.c							\
 				printf/ft_printf.c							\
+				printf/get/get_ptr_function.c				\
+				printf/precision/precision_right.c
 
 SRCS		=	$(addprefix $(SRCDIR), $(SRCBASE))
 

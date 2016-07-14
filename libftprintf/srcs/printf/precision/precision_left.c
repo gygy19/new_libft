@@ -22,6 +22,10 @@ static void		s_alt(t_string *t)
 		add_char(t, t->zero);
 		t->space -= 2;
 	}
+	if (t->base == 16 && t->is_big == 3)
+	{
+		add_string(t, "0x", 1);
+	}
 	if (ft_atoi(t->tmp) != 0 && (t->sub_flags & SUB_SHARP)
 		&& t->base == 8)
 	{
@@ -55,8 +59,9 @@ void			process_left(t_string *t)
 
 	s_flags(t);
 	s_alt(t);
-	t->space -= ft_strlen(t->tmp)
-		+ t->zero;
+	t->space -= ft_strlen(t->tmp) + t->zero;
+	if (t->space > 0 && t->is_big == 3)
+		t->space -= 2;
 	if (t->zero > 0)
 	{
 		temp = t->space;

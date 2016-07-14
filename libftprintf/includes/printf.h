@@ -6,7 +6,7 @@
 /*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 14:11:36 by jguyet            #+#    #+#             */
-/*   Updated: 2016/03/17 14:12:48 by jguyet           ###   ########.fr       */
+/*   Updated: 2016/07/12 19:16:09 by jguyet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct			s_string
 	short				end;
 	char				*tmp;
 	void				*ptrs[conv_len];
+	char				is_big;
 }						t_string;
 
 #  define BUFFER 2048
@@ -85,6 +86,7 @@ void					load(t_string *t);
 void					precision(t_string *t);
 void					fill_character(t_string *t, char c);
 void					process_left(t_string *t);
+void					process_right(t_string *t);
 /*
 ** FUNCTION
 */
@@ -126,6 +128,8 @@ short					get_short(t_string *t);
 unsigned short			get_ushort(t_string *t);
 size_t					get_size_t(t_string *t);
 intmax_t				get_intmax_t(t_string *t);
+int						get_ptr_function(t_string *string, \
+						int i, int f(t_string*, int));
 
 /*
 **	ADD

@@ -14,42 +14,25 @@
 
 #include "printf.h"
 
-int			inter(t_string *string, int i, int f(t_string*, int))
-{
-	return (f(string, i));
-}
-
-void		load_ptr_function(t_string *string)
-{
-	string->ptrs[s] = &conv_s;
-	string->ptrs[c] = &conv_c;
-	string->ptrs[d] = &conv_d;
-	string->ptrs[i] = &conv_d;
-	string->ptrs[x] = &conv_x;
-	string->ptrs[big_x] = &conv_big_x;
-	string->ptrs[big_c] = &conv_big_c;
-	string->ptrs[big_s] = &conv_big_s;
-	string->ptrs[p] = &conv_p;
-	string->ptrs[big_d] = &conv_big_d;
-	string->ptrs[o] = &conv_o;
-	string->ptrs[big_o] = &conv_big_o;
-	string->ptrs[u] = &conv_u;
-	string->ptrs[big_u] = &conv_big_u;
-}
-
 int			parse_ptr(t_string *string, int i)
 {
 	int		l;
 	char	*sptrs;
 
 	sptrs = ft_strdup("scdixXCSpDoOuU");
-	load_ptr_function(string);
 	l = -1;
 	while (sptrs[++l])
 		if (sptrs[l] == string->s[i + 1])
-			return (inter(string, i, string->ptrs[l]));
-	if (!ft_strncmp("%", FLAG, 1) && (i = i + 1))
-		add_char(string, '%');
+			return (get_ptr_function(string, i, string->ptrs[l]));
+	if (!ft_strncmp("%", FLAG, 1))
+		return (conv_purcent(string, i));
+	else if (string->sub_num != NULL)
+	{
+		string->tmp = ft_strndup(string->s + i + 1, 1);
+		string->is_big = 5;
+		add_conv_string(string, string->tmp);
+		return (i + 1);
+	}
 	return (i);
 }
 
@@ -103,6 +86,8 @@ void		restart_string_params(t_string *string)
 	string->space = 0;
 	string->zero = 0;
 	string->is_negative = 0;
+	string->sub_num = NULL;
+	string->is_big = 0;
 }
 
 int			parse_flags(t_string *string, int i)

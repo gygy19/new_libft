@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_outstring.c                                     :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/21 06:48:50 by jguyet            #+#    #+#             */
-/*   Updated: 2016/05/21 06:48:52 by jguyet           ###   ########.fr       */
+/*   Created: 2016/07/12 19:20:55 by jguyet            #+#    #+#             */
+/*   Updated: 2016/07/12 19:20:58 by jguyet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void			ft_outstring(char **ptr, int len)
+int				ft_max(int min, int nbr)
 {
-	char	*tmp;
-	int		i;
-
-	if (len <= 0)
-		return ;
-	tmp = *ptr;
-	i = len;
-	while (tmp[i])
-	{
-		tmp[i - len] = tmp[i];
-		i++;
-	}
-	i -= len;
-	while (tmp[i])
-		tmp[i++] = '\0';
+	if (nbr < min)
+		return (min);
+	return (nbr);
 }

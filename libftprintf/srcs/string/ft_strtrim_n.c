@@ -31,7 +31,7 @@ static int		ft_strchrnoprint2(char *s, int i)
 char			*ft_strtrim_n(char const *s)
 {
 	char		*result;
-	int		end;
+	int			end;
 
 	if (!s)
 		return (NULL);

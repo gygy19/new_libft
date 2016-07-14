@@ -27,6 +27,24 @@ static void	put_printf(t_string *string)
 	}
 }
 
+void		load_ptr_function(t_string *string)
+{
+	string->ptrs[s] = &conv_s;
+	string->ptrs[c] = &conv_c;
+	string->ptrs[d] = &conv_d;
+	string->ptrs[i] = &conv_d;
+	string->ptrs[x] = &conv_x;
+	string->ptrs[big_x] = &conv_big_x;
+	string->ptrs[big_c] = &conv_big_c;
+	string->ptrs[big_s] = &conv_big_s;
+	string->ptrs[p] = &conv_p;
+	string->ptrs[big_d] = &conv_big_d;
+	string->ptrs[o] = &conv_o;
+	string->ptrs[big_o] = &conv_big_o;
+	string->ptrs[u] = &conv_u;
+	string->ptrs[big_u] = &conv_big_u;
+}
+
 int			ft_printf(const char *s, ...)
 {
 	t_string	*string;
@@ -37,6 +55,7 @@ int			ft_printf(const char *s, ...)
 	string->res = 0;
 	string->new = ft_strnew(BUFFER);
 	string->sub_num = NULL;
+	load_ptr_function(string);
 	va_start(string->list, (char*)s);
 	parse_flags(string, 0);
 	put_printf(string);
@@ -55,6 +74,7 @@ int			ft_asprintf(char **ptr, const char *s, ...)
 	string->res = 0;
 	string->new = ft_strnew(BUFFER);
 	string->sub_num = NULL;
+	load_ptr_function(string);
 	va_start(string->list, (char*)s);
 	parse_flags(string, 0);
 	*ptr = string->new;
