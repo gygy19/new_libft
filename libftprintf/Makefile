@@ -140,7 +140,10 @@ SRCBASE		=	\
 				printf/handler.c							\
 				printf/ft_printf.c							\
 				printf/get/get_ptr_function.c				\
-				printf/precision/precision_right.c
+				printf/precision/precision_right.c			\
+				printf/precision/base/eight.c				\
+				printf/precision/base/ten.c					\
+				printf/precision/base/sixteen.c
 
 SRCS		=	$(addprefix $(SRCDIR), $(SRCBASE))
 

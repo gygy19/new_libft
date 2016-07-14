@@ -25,24 +25,20 @@ static void		s_alt(t_string *t)
 			add_char(t, 'x');
 	}
 	if (t->base == 16 && t->is_big == 3)
-	{
 		add_string(t, "0x", 1);
-	}
 	else if (t->is_big && (t->sub_flags & SUB_SHARP) && t->tmp == NULL)
 	{
 		add_char(t, '0');
 		t->space -= 1;
 	}
-	if (ft_atoi(t->tmp) != 0 \
-		&& (t->sub_flags & SUB_SHARP) && t->base == 8)
-	{
-		add_char(t, '0');
-		t->space -= 1;
-	}
+	if (t->base == 8)
+		alt_eight(t);
 }
 
 static void		signe(t_string *t)
 {
+	if (t->base != 10)
+		return ;
 	if (((t->sub_flags & SUB_INF) && t->base == 10)
 		|| (t->is_negative && t->base == 10))
 		add_char(t, '-');
@@ -54,18 +50,21 @@ static void		signe(t_string *t)
 
 static void		if_flags(t_string *t)
 {
-	if (((t->sub_flags & SUB_INF) && t->base == 10)
-		|| (t->is_negative && t->base == 10))
-		t->space -= 1;
-	else if ((t->sub_flags & SUB_SUP) && t->base == 10)
-		t->space -= 1;
-	else if ((t->sub_flags & SUB_SPACE) && t->base == 10)
-		t->space -= 1;
-	if ((t->sub_flags & SUB_SHARP) && t->base == 16)
-		t->space -= 2;
-	if (t->zero <= (short)ft_strlen(t->tmp) \
-		&& (t->sub_flags & SUB_SHARP) && t->base == 8)
-		t->space -= 1;
+	if (t->base == 10)
+	{
+		if_flag_ten(t);
+		return ;
+	}
+	if (t->base == 16)
+	{
+		if_flag_sixteen(t);
+		return ;
+	}
+	if (t->base == 8)
+	{
+		is_flag_eight(t);
+		return ;
+	}
 }
 
 static void		finaly_zero(int tmp, t_string *t)
@@ -84,6 +83,8 @@ void			process_right(t_string *t)
 	int tmp;
 
 	tmp = t->space;
+	if (tmp > 0 && t->zero == 0 && !ft_strcmp(t->tmp, "0"))
+		t->tmp = NULL;
 	t->space -= ft_strlen(t->tmp) + t->zero;
 	if (t->space > 0 && t->is_big == 3)
 		t->space -= 2;

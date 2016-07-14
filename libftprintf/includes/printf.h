@@ -181,5 +181,14 @@ char					*flag_j(t_string *string, short base);
 char					*flag_int(t_string *string, short base);
 char					*flag_uint(t_string *string, short base);
 
+/*
+** BASES
+*/
+
+char					alt_eight(t_string *t);
+char					if_flag_sixteen(t_string *t);
+char					if_flag_ten(t_string *t);
+char					is_flag_eight(t_string *t);
+
 # endif
 #endif
