@@ -14,7 +14,7 @@
 
 #include "printf.h"
 
-static void		s_trunc(char **s, int length)
+static void		s_trunc(char **s, int length, wchar_t *wtmp)
 {
 	int		size;
 	int		index;
@@ -25,7 +25,18 @@ static void		s_trunc(char **s, int length)
 	if (*s == NULL)
 		return ;
 	index = 0;
-	*s = ft_strndup(*s, length);
+	if (wtmp != NULL)
+	{
+		size = 0;
+		*s = ft_strnew(0);
+		while ((size + ft_wlen(wtmp[index])) <= length)
+		{
+			size += ft_wlen(wtmp[index]);
+			*s = ft_strjoin(*s, wchar_to_string(wtmp[index++]));
+		}
+	}
+	else
+		*s = ft_strndup(*s, length);
 }
 
 void			fill_character(t_string *t, char c)
@@ -43,9 +54,10 @@ void			add_conv_string(t_string *t, char *s)
 
 	load(t);
 	len = ft_strlen(s);
-	if (t->zero != 0)
+	if (t->zero > 0 || !ft_strcmp(t->sub_num, ".0") \
+		|| !ft_strcmp(t->sub_num, "0.0"))
 	{
-		s_trunc(&s, t->zero);
+		s_trunc(&s, t->zero, t->wtmp);
 		len = ft_strlen(s);
 	}
 	else if (ft_strlen(t->sub_num) > 0 \
@@ -55,10 +67,7 @@ void			add_conv_string(t_string *t, char *s)
 		len = 0;
 	}
 	if ((t->space -= len) < 0)
-	{
-		add_string(t, s, 0);
-		return ;
-	}
+		return ((void)add_string(t, s, 0));
 	if (t->left == 0)
 		fill_character(t, t->pad);
 	add_string(t, s, 0);

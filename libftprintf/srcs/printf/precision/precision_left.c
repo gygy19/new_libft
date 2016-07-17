@@ -19,7 +19,10 @@ static void		s_alt(t_string *t)
 	if ((t->sub_flags & SUB_SHARP) && t->base == 16)
 	{
 		add_char(t, L'0');
-		add_char(t, t->zero);
+		if (t->is_big)
+			add_char(t, 'X');
+		else
+			add_char(t, 'x');
 		t->space -= 2;
 	}
 	if (t->base == 16 && t->is_big == 3)

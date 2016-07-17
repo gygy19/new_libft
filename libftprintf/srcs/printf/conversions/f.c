@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eight.c                                            :+:      :+:    :+:   */
+/*   f.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jguyet <jguyet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/14 04:28:08 by jguyet            #+#    #+#             */
-/*   Updated: 2016/07/14 04:28:40 by jguyet           ###   ########.fr       */
+/*   Created: 2016/07/15 02:05:41 by jguyet            #+#    #+#             */
+/*   Updated: 2016/07/15 02:06:09 by jguyet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,25 @@
 
 #include "printf.h"
 
-char			alt_eight(t_string *t)
+static void		conv_process(t_string *string, char *tmp)
 {
-	if (ft_atoi(t->tmp) != 0 \
-		&& (t->sub_flags & SUB_SHARP))
-	{
-		add_char(t, '0');
-		t->space -= 1;
-	}
-	else if (t->tmp != NULL && !ft_strcmp(t->tmp, "0"))
-	{
-		t->tmp = ft_strdelandnew(&t->tmp, 0);
-		t->space++;
-	}
-	return (1);
+	string->base = 10;
+	string->tmp = tmp;
+	precision(string);
 }
 
-char			is_flag_eight(t_string *t)
+static char		*float_conv(t_string *string, double tmp)
 {
-	if (t->zero <= (short)ft_strlen(t->tmp) \
-		&& (t->sub_flags & SUB_SHARP))
-		t->space -= 1;
-	return (1);
+	load(string);
+	return (ft_convert_double_to_string(tmp, string->zero > 0 \
+		? string->zero : 6));
+}
+
+int				conv_f(t_string *string, int i)
+{
+	char *tmp;
+
+	tmp = float_conv(string, get_float(string));
+	conv_process(string, tmp);
+	return (i + 1);
 }

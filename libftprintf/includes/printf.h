@@ -29,8 +29,8 @@ typedef struct			s_convert
 typedef enum			e_ptr_conv
 {
 	s = 0,
-	c,
 	d,
+	c,
 	i,
 	x,
 	big_x,
@@ -42,6 +42,8 @@ typedef enum			e_ptr_conv
 	big_o,
 	u,
 	big_u,
+	f,
+	big_f,
 	conv_len
 }						t_ptr_conv;
 
@@ -64,10 +66,13 @@ typedef struct			s_string
 	char				*tmp;
 	void				*ptrs[conv_len];
 	char				is_big;
+	wchar_t				*wtmp;
 }						t_string;
 
-#  define BUFFER 2048
+#  define BUFFER 4096
 #  define FLAG string->s + (i + 1)
+#  define SECURE string->s[i + 1] != '\0'
+#  define AI (i = i + 1)
 #  define SUB_SHARP 1024
 #  define SUB_ZERO 2048
 #  define SUB_INF 4096
@@ -75,6 +80,16 @@ typedef struct			s_string
 #  define SUB_SPACE 16384
 #  define DELIMITER '%'
 #  define MAX_UINT 4294967295
+#  define NRM  "\x1B[0m"
+#  define RED  "\x1B[31m"
+#  define GRN  "\x1B[32m"
+#  define YEL  "\x1B[33m"
+#  define BLU  "\x1B[34m"
+#  define MAG  "\x1B[35m"
+#  define CYN  "\x1B[36m"
+#  define WHT  "\x1B[37m"
+#  define BOL  "\e[1m"
+#  define BONUS 0
 
 /*
 **	HANDLER
@@ -82,7 +97,9 @@ typedef struct			s_string
 
 int						parse_flags(t_string *string, int i);
 void					load(t_string *t);
-
+void					modif_colors(t_string *string);
+void					ft_printf_center(t_string *string);
+void					printf_budle(t_string *string);
 void					precision(t_string *t);
 void					fill_character(t_string *t, char c);
 void					process_left(t_string *t);
@@ -130,6 +147,7 @@ size_t					get_size_t(t_string *t);
 intmax_t				get_intmax_t(t_string *t);
 int						get_ptr_function(t_string *string, \
 						int i, int f(t_string*, int));
+double					get_float(t_string *t);
 
 /*
 **	ADD
@@ -138,6 +156,8 @@ int						get_ptr_function(t_string *string, \
 void					add_wchar(t_string *t, wchar_t c);
 char					*wschar_to_string(wchar_t *s);
 char					*wchar_to_string(wchar_t c);
+int						ft_wslen(wchar_t *c);
+int						ft_wlen(wchar_t c);
 
 /*
 ** CONVERSION
@@ -152,11 +172,13 @@ int						conv_big_x(t_string *string, int i);
 int						conv_s(t_string *string, int i);
 int						conv_c(t_string *string, int i);
 int						conv_d(t_string *string, int i);
+int						conv_i(t_string *string, int i);
 int						conv_o(t_string *string, int i);
 int						conv_p(t_string *string, int i);
 int						conv_purcent(t_string *string, int i);
 int						conv_u(t_string *string, int i);
 int						conv_x(t_string *string, int i);
+int						conv_f(t_string *string, int i);
 
 /*
 ** FLAGS

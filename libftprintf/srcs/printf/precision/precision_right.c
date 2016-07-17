@@ -83,8 +83,6 @@ void			process_right(t_string *t)
 	int tmp;
 
 	tmp = t->space;
-	if (tmp > 0 && t->zero == 0 && !ft_strcmp(t->tmp, "0"))
-		t->tmp = NULL;
 	t->space -= ft_strlen(t->tmp) + t->zero;
 	if (t->space > 0 && t->is_big == 3)
 		t->space -= 2;

@@ -110,6 +110,8 @@ void				ft_outstring(char **ptr, int len);
 char				*ft_strtrim_string(char const *s, char const *c);
 char				**ft_split_string(char const *s, char *c);
 unsigned int		ft_lenbychar(char *s, char c);
+char				*ft_replace(char *str, char *old, char *new);
+char				*ft_strdelandnew(char **del, int size);
 
 /*
 ** LST
@@ -128,6 +130,8 @@ char				*ft_itoabase(long long int nbr, char *base);
 int					*ft_add_end_int(int *tab, int val, int size);
 int					ft_nbrlen(long long int nbr);
 int					ft_max(int min, int nbr);
+char				*ft_convert_double_to_string(double nbr, \
+					unsigned int precision);
 
 /*
 ** UINT
@@ -135,5 +139,17 @@ int					ft_max(int min, int nbr);
 
 char				*ft_uitoabase(unsigned long long int nbr, char *base);
 char				*ft_uitoa(unsigned long long int c);
+
+# define ___N0		STDERR_FILENO, "{bold}{red}ERROR{white} %s:%i:{reset}\t"
+# define ___N1		__FILE__, __LINE__
+# define ERROR(format, ...)	ft_dprintf(___N0 format "\n", ___N1, ##__VA_ARGS__)
+
+# define ___N2		"{bold}{yellow}DEBUG {white}%s:%i:{reset}\t"
+# define ___N3		__FILE__, __LINE__
+# define DEBUG(format, ...)	ft_printf(___N2 format "\n", ___N3, ##__VA_ARGS__)
+
+# define ___N4		"{bold}{yellow}DEBUG {cyan}\'%s\' {white}%s:%i{reset}"
+# define ___N5		__func__, __FILE__, __LINE__
+# define DEBUGLINE	ft_printf(___N4 "\n", ___N5)
 
 #endif

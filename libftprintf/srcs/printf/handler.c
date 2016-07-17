@@ -19,13 +19,17 @@ int			parse_ptr(t_string *string, int i)
 	int		l;
 	char	*sptrs;
 
-	sptrs = ft_strdup("scdixXCSpDoOuU");
+	sptrs = ft_strdup("sdcixXCSpDoOuUfF");
 	l = -1;
 	while (sptrs[++l])
 		if (sptrs[l] == string->s[i + 1])
+		{
 			return (get_ptr_function(string, i, string->ptrs[l]));
+		}
 	if (!ft_strncmp("%", FLAG, 1))
+	{
 		return (conv_purcent(string, i));
+	}
 	else if (string->sub_num != NULL)
 	{
 		string->tmp = ft_strndup(string->s + i + 1, 1);
@@ -36,45 +40,38 @@ int			parse_ptr(t_string *string, int i)
 	return (i);
 }
 
-int			select_converter_two(t_string *string, int i)
+int			select_convert(t_string *string, int i)
 {
-	if (!ft_strncmp("j", FLAG, 1) && (i = i + 1))
-	{
-		string->converter.type[0] = 'j';
-		string->converter.type[1] = '\0';
-	}
-	else if (!ft_strncmp("z", FLAG, 1) && (i = i + 1))
-	{
-		string->converter.type[0] = 'z';
-		string->converter.type[1] = '\0';
-	}
-	return (i);
-}
+	char	*lst;
+	int		o;
+	int		turn;
+	int		ok;
 
-int			select_converter_one(t_string *string, int i)
-{
-	if (!ft_strncmp("ll", FLAG, 2) && (i = i + 2))
+	lst = ft_memcpy(ft_strnew(13), "lll\0z\0j\0hhh\0\0", 13);
+	o = 0;
+	turn = 100;
+	ok = 0;
+	while (lst[o])
 	{
-		string->converter.type[0] = 'l';
-		string->converter.type[1] = 'l';
+		if (SECURE && !ft_strncmp(lst + o, FLAG, lst[o + 1] == '\0' ? 1 : 2))
+		{
+			if (turn > o)
+			{
+				string->converter.type[0] = lst[o];
+				string->converter.type[1] = lst[o + 1];
+				turn = o;
+				ok = 1;
+			}
+			i += lst[o + 1] == '\0' ? 1 : 2;
+		}
+		o += 2;
+		if (o == 10 && ok != 0)
+		{
+			o = 0;
+			ok = 0;
+		}
 	}
-	else if (!ft_strncmp("l", FLAG, 1) && (i = i + 1))
-	{
-		string->converter.type[0] = 'l';
-		string->converter.type[1] = '\0';
-	}
-	else if (!ft_strncmp("hh", FLAG, 2) && (i = i + 2))
-	{
-		string->converter.type[0] = 'h';
-		string->converter.type[1] = 'h';
-	}
-	else if (!ft_strncmp("h", FLAG, 1) && (i = i + 1))
-	{
-		string->converter.type[0] = 'h';
-		string->converter.type[1] = '\0';
-	}
-	else
-		return (select_converter_two(string, i));
+	ft_strdel(&lst);
 	return (i);
 }
 
@@ -86,7 +83,8 @@ void		restart_string_params(t_string *string)
 	string->space = 0;
 	string->zero = 0;
 	string->is_negative = 0;
-	string->sub_num = NULL;
+	if (string->sub_num != NULL)
+		ft_strdel(&string->sub_num);
 	string->is_big = 0;
 }
 
@@ -105,11 +103,10 @@ int			parse_flags(t_string *string, int i)
 	if (string->s[i] && string->s[i] == DELIMITER && string->s[i + 1])
 	{
 		i = sub_flags(string, i);
-		i = select_converter_one(string, i);
+		i = select_convert(string, i);
 		save = i + 1;
 		i = parse_ptr(string, i);
 		restart_string_params(string);
-		ft_strdel(&string->sub_num);
 	}
 	else
 		return (0);

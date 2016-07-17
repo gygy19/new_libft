@@ -20,6 +20,12 @@ static void	put_printf(t_string *string)
 	unsigned int i;
 
 	i = 0;
+	if (BONUS)
+	{
+		printf_budle(string);
+		ft_printf_center(string);
+		modif_colors(string);
+	}
 	while (i < string->res)
 	{
 		write(1, string->new + i, 1);
@@ -30,9 +36,9 @@ static void	put_printf(t_string *string)
 void		load_ptr_function(t_string *string)
 {
 	string->ptrs[s] = &conv_s;
-	string->ptrs[c] = &conv_c;
 	string->ptrs[d] = &conv_d;
-	string->ptrs[i] = &conv_d;
+	string->ptrs[c] = &conv_c;
+	string->ptrs[i] = &conv_i;
 	string->ptrs[x] = &conv_x;
 	string->ptrs[big_x] = &conv_big_x;
 	string->ptrs[big_c] = &conv_big_c;
@@ -43,6 +49,8 @@ void		load_ptr_function(t_string *string)
 	string->ptrs[big_o] = &conv_big_o;
 	string->ptrs[u] = &conv_u;
 	string->ptrs[big_u] = &conv_big_u;
+	string->ptrs[f] = &conv_f;
+	string->ptrs[big_f] = &conv_f;
 }
 
 int			ft_printf(const char *s, ...)

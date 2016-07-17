@@ -94,6 +94,7 @@ SRCBASE		=	\
 				int/ft_itoabase.c							\
 				int/ft_litoa.c								\
 				int/ft_nbrlen.c								\
+				int/ft_convert_double_to_string.c			\
 				int/ft_max.c								\
 				uint/ft_uitoabase.c							\
 				uint/ft_uitoa.c								\
@@ -107,6 +108,8 @@ SRCBASE		=	\
 				string/ft_dstrjoin.c						\
 				string/ft_dstrjoin_char.c					\
 				string/ft_split_string.c					\
+				string/ft_replace.c							\
+				string/ft_strdelandnew.c					\
 				printf/add/add_char.c						\
 				printf/add/add_int.c						\
 				printf/add/add_long.c						\
@@ -123,6 +126,7 @@ SRCBASE		=	\
 				printf/conversions/p.c						\
 				printf/conversions/u.c						\
 				printf/conversions/x.c						\
+				printf/conversions/f.c						\
 				printf/flags/h.c							\
 				printf/flags/hh.c							\
 				printf/flags/l.c							\
@@ -133,6 +137,7 @@ SRCBASE		=	\
 				printf/get/get_char.c						\
 				printf/get/get_int.c						\
 				printf/get/get_long.c						\
+				printf/get/get_float.c						\
 				printf/get/get_string.c						\
 				printf/sub_flags/sub_flags.c				\
 				printf/precision/precision.c				\
@@ -143,7 +148,10 @@ SRCBASE		=	\
 				printf/precision/precision_right.c			\
 				printf/precision/base/eight.c				\
 				printf/precision/base/ten.c					\
-				printf/precision/base/sixteen.c
+				printf/precision/base/sixteen.c				\
+				printf/colors/colors.c						\
+				printf/bonus/center.c						\
+				printf/bonus/budle.c
 
 SRCS		=	$(addprefix $(SRCDIR), $(SRCBASE))
 

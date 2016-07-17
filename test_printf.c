@@ -20,9 +20,10 @@
 
 int		main(void)
 {
-	/*int ret2 = printf("a%Sb%sc%S", L"我", "42", L"猫");
-	int ret = ft_printf("a%Sb%sc%S", L"我", "42", L"猫");
-
-	printf("\n%d, %d", ret, ret2);*/
+	//int ret2 = printf(la%Sb%sc%Sl, Ll我l, l42l, Ll猫l);
+	//int ret = ft_printf(la%Sb%sc%Sl, Ll我l, l42l, Ll猫l);
+	//printf(l\n%d, %dl, ret, ret2);
+	ft_printf("[%ls],lol\n", "lol\n");
+	printf("[%ls,lol%d\n", "lol\n", 7);
 	return (0);
 }

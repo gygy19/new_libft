@@ -27,9 +27,11 @@ int			conv_s(t_string *string, int i)
 {
 	wchar_t *tmp;
 
+	string->wtmp = NULL;
 	if (!ft_strncmp(string->converter.type, "l", 1))
 	{
 		tmp = get_wstring(string);
+		string->wtmp = tmp;
 		if (tmp == NULL)
 			flag_default_string(string, NULL, 0);
 		else
@@ -44,7 +46,9 @@ int			conv_big_s(t_string *string, int i)
 {
 	wchar_t *tmp;
 
+	string->wtmp = NULL;
 	tmp = get_wstring(string);
+	string->wtmp = tmp;
 	if (tmp == NULL)
 		flag_default_string(string, NULL, 0);
 	else
