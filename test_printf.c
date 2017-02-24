@@ -6,7 +6,7 @@
 /*   By: frmarinh <frmarinh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/17 15:32:16 by frmarinh          #+#    #+#             */
-/*   Updated: 2016/03/17 15:33:16 by frmarinh         ###   ########.fr       */
+/*   Updated: 2017/02/13 16:29:11 by jguyet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 int		main(void)
 {
-	//int ret2 = printf(la%Sb%sc%Sl, Ll我l, l42l, Ll猫l);
-	//int ret = ft_printf(la%Sb%sc%Sl, Ll我l, l42l, Ll猫l);
-	//printf(l\n%d, %dl, ret, ret2);
-	ft_printf("[%ls],lol\n", "lol\n");
-	printf("[%ls,lol%d\n", "lol\n", 7);
+	int ret2 = printf("YOla%Sb%sc%Sl\n", "我", "4", "猫");
+	int ret = ft_printf("LOla%Sb%sc%Sl\n", "我", "4", "猫");
+	printf("%d, %d", ret, ret2);
+	//ft_printf("[%ls],lol\n", "lol\n");
+	//printf("[%ls,lol%d\n", "lol\n", 7);
 	return (0);
 }
