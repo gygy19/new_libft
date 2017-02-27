@@ -156,6 +156,8 @@ char					*wschar_to_string(wchar_t *s);
 char					*wchar_to_string(wchar_t c);
 int						ft_wslen(wchar_t *c);
 int						ft_wlen(wchar_t c);
+int						add_wildcard(char **n, int i, t_string *t, short point);
+int						sub(t_string *string, int i, char *s, int zero);
 
 /*
 ** CONVERSION

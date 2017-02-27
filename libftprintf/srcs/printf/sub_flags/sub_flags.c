@@ -14,7 +14,7 @@
 
 #include "printf.h"
 
-static int		sub(t_string *string, int i, char *s, int zero)
+int				sub(t_string *string, int i, char *s, int zero)
 {
 	while ((s[i + 1] && s[i + 1] == '#')
 		|| (s[i + 1] && s[i + 1] == '-')
