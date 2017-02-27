@@ -69,28 +69,6 @@ int				add_digit(char **n, int i, t_string *t, short havestars)
 	return (i);
 }
 
-int				add_wildcard(char **n, int i, t_string *t, short point)
-{
-	int nbr;
-
-	nbr = get_int(t);
-	if (nbr < 0)
-	{
-		nbr = -nbr;
-		if (point == 0 && !(t->sub_flags & SUB_INF))
-			t->sub_flags += SUB_INF;
-		else
-			nbr = -nbr;
-	}
-	if (point == 0 && *n[0] != '\0')
-		*n = ft_strdelandnew(n, 0);
-	if (point > 0 || sub(t, -1, *n, 1) == -1)
-		*n = ft_dstrjoin(*n, ft_litoa(nbr), 3);
-	else
-		*n = ft_dstrjoin(*n, ft_litoa(nbr), 3);
-	return (i);
-}
-
 static int		center_parse_sub(t_string *string, int i, char **n)
 {
 	short point;
@@ -112,11 +90,8 @@ static int		center_parse_sub(t_string *string, int i, char **n)
 			i = add_wildcard(n, i, string, point);
 			startpts++;
 		}
-		else if (point == 0)
-		{
+		else if (point == 0 && ++point > 0)
 			*n = ft_dstrjoin(*n, ".", 1);
-			point++;
-		}
 		i++;
 	}
 	final_parse_sub(string, n);

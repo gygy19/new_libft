@@ -16,14 +16,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
+#include <mapft.h>
 
 
 int		main(void)
 {
-	int ret2 = printf("YOla%Sb%sc%Sl\n", "我", "4", "猫");
-	int ret = ft_printf("LOla%Sb%sc%Sl\n", "我", "4", "猫");
-	printf("%d, %d", ret, ret2);
-	//ft_printf("[%ls],lol\n", "lol\n");
-	//printf("[%ls,lol%d\n", "lol\n", 7);
+	ft_printf("{blue}lollolololo{reset}\n");
 	return (0);
 }

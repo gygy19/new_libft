@@ -22,8 +22,6 @@ static void	put_printf(t_string *string)
 	i = 0;
 	if (BONUS)
 	{
-		printf_budle(string);
-		ft_printf_center(string);
 		modif_colors(string);
 	}
 	while (i < string->res)

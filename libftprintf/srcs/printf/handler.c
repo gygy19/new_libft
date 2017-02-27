@@ -14,7 +14,7 @@
 
 #include "printf.h"
 
-int			parse_ptr(t_string *string, int i)
+int				parse_ptr(t_string *string, int i)
 {
 	int		l;
 	char	*sptrs;
@@ -40,27 +40,28 @@ int			parse_ptr(t_string *string, int i)
 	return (i);
 }
 
-int			select_convert(t_string *string, int i)
+static void		set_converter(t_string *string, char c1, char c2, int *ok)
+{
+	string->converter.type[0] = c1;
+	string->converter.type[1] = c2;
+	*ok = 1;
+}
+
+static int		select_convert(t_string *string, int i, int o, int ok)
 {
 	char	*lst;
-	int		o;
 	int		turn;
-	int		ok;
 
 	lst = ft_memcpy(ft_strnew(13), "lll\0z\0j\0hhh\0\0", 13);
-	o = 0;
 	turn = 100;
-	ok = 0;
 	while (lst[o])
 	{
 		if (SECURE && !ft_strncmp(lst + o, FLAG, lst[o + 1] == '\0' ? 1 : 2))
 		{
 			if (turn > o)
 			{
-				string->converter.type[0] = lst[o];
-				string->converter.type[1] = lst[o + 1];
+				set_converter(string, lst[o], lst[o + 1], &ok);
 				turn = o;
-				ok = 1;
 			}
 			i += lst[o + 1] == '\0' ? 1 : 2;
 		}
@@ -75,7 +76,7 @@ int			select_convert(t_string *string, int i)
 	return (i);
 }
 
-void		restart_string_params(t_string *string)
+void			restart_string_params(t_string *string)
 {
 	string->converter.type[0] = '\0';
 	string->converter.type[1] = '\0';
@@ -88,7 +89,7 @@ void		restart_string_params(t_string *string)
 	string->is_big = 0;
 }
 
-int			parse_flags(t_string *string, int i)
+int				parse_flags(t_string *string, int i)
 {
 	int save;
 
@@ -103,7 +104,7 @@ int			parse_flags(t_string *string, int i)
 	if (string->s[i] && string->s[i] == DELIMITER && string->s[i + 1])
 	{
 		i = sub_flags(string, i);
-		i = select_convert(string, i);
+		i = select_convert(string, i, 0, 0);
 		save = i + 1;
 		i = parse_ptr(string, i);
 		restart_string_params(string);

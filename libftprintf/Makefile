@@ -140,6 +140,7 @@ SRCBASE		=	\
 				printf/get/get_float.c						\
 				printf/get/get_string.c						\
 				printf/sub_flags/sub_flags.c				\
+				printf/sub_flags/sub_flags_suite.c			\
 				printf/precision/precision.c				\
 				printf/precision/precision_left.c			\
 				printf/handler.c							\
@@ -150,8 +151,8 @@ SRCBASE		=	\
 				printf/precision/base/ten.c					\
 				printf/precision/base/sixteen.c				\
 				printf/colors/colors.c						\
-				printf/bonus/center.c						\
-				printf/bonus/budle.c
+				map/hashmap.c								\
+				map/hashmap_functions.c
 
 SRCS		=	$(addprefix $(SRCDIR), $(SRCBASE))
 

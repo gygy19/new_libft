@@ -89,7 +89,7 @@ typedef struct			s_string
 #  define CYN  "\x1B[36m"
 #  define WHT  "\x1B[37m"
 #  define BOL  "\e[1m"
-#  define BONUS 0
+#  define BONUS 1
 
 /*
 **	HANDLER
@@ -98,8 +98,6 @@ typedef struct			s_string
 int						parse_flags(t_string *string, int i);
 void					load(t_string *t);
 void					modif_colors(t_string *string);
-void					ft_printf_center(t_string *string);
-void					printf_budle(t_string *string);
 void					precision(t_string *t);
 void					fill_character(t_string *t, char c);
 void					process_left(t_string *t);
